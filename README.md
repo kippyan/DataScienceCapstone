@@ -3,11 +3,12 @@
  C.S.U. Chico Computer Science B.S. and Data Science Certificate Senior Project
  
  Olivia Lund ([GitHub](https://github.com/kippyan)), Fall 2020 semester
+
  Major advisor: Dr. Kevin Buffardi 
 
  Project collaborators:
- Kris Walker
- Dr. Robin Donatello
+ * Kris Walker
+ * Dr. Robin Donatello
 
 ***
 
