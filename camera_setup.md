@@ -51,15 +51,24 @@ The template projects are worth looking at, but their scope is very narrow. In o
 
 ## 1.3: Requesting a service limit increase for training models
 
+This step isn't going to be useful until it's time to train the model, however it's going to take time for AWS Support staff to respond, so it's a good idea to consider doing it as early as possible. It took them about six hours to get back to me, but this likely has a huge degree of variability. This information is copied from [https://docs.aws.amazon.com/deeplens/latest/dg/deeplens-getting-started-launch-sagemaker.html](https://docs.aws.amazon.com/deeplens/latest/dg/deeplens-getting-started-launch-sagemaker.html)
+
 The standard VMs provided by AWS lack the powerful GPU that is necessary for training a SageMaker model, and as a result a request ticket has to be created. First, navigate to [https://console.aws.amazon.com/support/home#/case/create](https://console.aws.amazon.com/support/home#/case/create) and select Service Limit Increase
 
 ![](./image/19.png)
+
+From there, fill out the following information in the "Case details" and "Requests" sections:
+
+![](./image/20.png)
+
+The last field is for the case description. This should have a short explanation of why the additional resources are necessary. Simply explaining that the GPU-enabled machines are to be used with TensorFlow to train a deep learning model for using on a DeepLens device should suffice. 
+
 
 
 
 ## 2: Creating a training model
 
-For tjis section, this guide was immensely helpful for learning how to get started:
+For this section, this guide was immensely helpful for learning how to get started:
 [https://docs.aws.amazon.com/deeplens/latest/dg/deeplens-getting-started-hard.html](https://docs.aws.amazon.com/deeplens/latest/dg/deeplens-getting-started-hard.html)
 
 
@@ -75,7 +84,7 @@ Once in the S3 console, select "Create a Bucket"
 
 ![](./image/9.png)
 
-From the bucket creation menu, create a name that follows the rules for bucket naming and select the nearest region. The rest of the settings can be left default.
+From the bucket creation menu, create a name that begins with deeplens-sagemaker- which allows both DeepLens and SageMaker to recognize it. The rest of the settings can be left default.
 
 ![](./image/10.png)
 
@@ -84,7 +93,7 @@ Now, from the S3 console, select the newly created bucket and click upload:
 ![](./image/11.png)
 
 It's now possible to add the data desired for training the model with.
-
+This project was intended for converting handwritten data on paper forms into spreadsheets. The forms were scanned into PDF and then converted to JPG to make it easier for a machine learning program to read them. CSV files were created manually for each of the forms. Each set of documents was added to a folder and uploaded to the bucket. 
 
 
 ### 2.2: Entering the Sagemaker Studio
@@ -113,50 +122,25 @@ Once this is complete, after a brief readying period, it should be possible to s
 
 ![](./image/17.png)
 
-The studio should show a characteristic dark background as such:
+The studio should show a splash screen with a characteristic dark background:
 
 ![](./image/18.png)
 
 
+### 2.3: Creating a Notebook
 
-### 2.3: Requesting Additional Resources
+From the Sagemaker Console (which has a white background, not the Sagemaker Studio, which has a dark background), select "Notebook instances" from the menu on the left:
 
+![](./image/21.png)
 
+Choose "Create notebook instance" from the menu on the right:
 
+![](./image/22.png)
 
+This notebook doesn't need any particular name, but should have an instance type of ml.p2.xlarge in order to facilitate training faster.
 
+![](./image/23.png)
 
-
-
-To begin this project, I printed out 20 copies each of the pre-class and post-class survey, and filled them out by hand, using names from https://www.name-generator.org.uk/quick/ and somewhat random answers with different answering styles and different writing implements to ensure some variability. This will provide some robustness although in order to avoid heavy bias around my handwriting the model would need to be trained on forms filled out by many different people. 
-
-
-
-
-
-
-It required getting anaconda working and after some poking around about why it didn't work I found out that I needed to run this:
-sudo wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86\_64.sh
-bash Miniconda2-latest-Linux-x86\_64.sh
-
-i was prompted to do 
-$conda update -n base -c defaults conda
-and then i had a weird issue where my terminal was preceeded with (base) so i did conda config and added 'changeps1: False' to it and reboot which fixed it
-
-conda create -n "py3.9" python=3.9.0
-conda activate py3.9
-conda install conda=4.9.2
-
-In running deeplens-hotdog-or-not i had to change the url of the "not a dog image" because it was dead. I had to read through the error log to find this out.
-
-I went through making three different python environments with different versions until I got far enough back that all the dependencies of the hotdog code worked
-
-change block 6 line 3 to be:
-wget -O scroll001.jpg https://bingvsdevportalprodgbl.blob.core.windows.net/demo-images/876bb7a8-e8dd-4e36-ab3a-f0b9aba942e5.jpg
-image is arbitrary
-
-Need to follow this guide https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html#cli-configure-quickstart-creds to get the last bit of the code to run.
-
-
+Once this is done, open the notebook in Jupyter Notebooks. Training is now ready to begin.
 
 
