@@ -29,7 +29,6 @@ This prompts the user with a dialog box asking which version of the DeepLens is 
 The next page is a set of very detailed instructions on carrying out the registration. Make sure to save the certificate, which is necessary for changing data on the device and will not be available again.
 
 
-
 ## 1.2: Configuring the camera project
 
 If registration was successful, navigating to [https://us-east-1.console.aws.amazon.com/deeplens/home?region=us-east-1#devices](https://us-east-1.console.aws.amazon.com/deeplens/home?region=us-east-1#devices) will look like the following image
@@ -65,8 +64,7 @@ The last field is for the case description. This should have a short explanation
 
 
 
-
-## 2: Creating a training model
+## 2: Preparing to create a model
 
 For this section, this guide was immensely helpful for learning how to get started:
 [https://docs.aws.amazon.com/deeplens/latest/dg/deeplens-getting-started-hard.html](https://docs.aws.amazon.com/deeplens/latest/dg/deeplens-getting-started-hard.html)
@@ -141,6 +139,10 @@ This notebook doesn't need any particular name, but should have an instance type
 
 ![](./image/23.png)
 
-Once this is done, open the notebook in Jupyter Notebooks. Training is now ready to begin.
+Once this is done, open the notebook in Jupyter Notebooks. This notebook will be used to contain, document, and run the python code used to conduct the training. 
 
 
+
+## 3: Training a model
+
+Unfortunately, this segment of the tutorial was never completed due to time constraints in the original project. Some useful resources for learning model training include [this official AWS repo of functioning example projects](https://github.com/aws/amazon-sagemaker-examples) and [this part of the DeepLens tutorial which walks through importing one of the example projects and using it to train a model](https://docs.aws.amazon.com/deeplens/latest/dg/deeplens-getting-started-launch-sagemaker.html). 
